@@ -45,5 +45,5 @@ jobs:
         echo "after cat"
         
         done
-        curl   -X POST   -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/tilnow/testbot/issues/1/labels  -d '{"labels":["bug"]}'
+        curl   -X POST   -H "Accept: application/vnd.github.v3+json" --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' https://api.github.com/repos/tilnow/testbot/issues/1/labels  -d '{"labels":["bug"]}'
 
