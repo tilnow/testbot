@@ -24,6 +24,8 @@ jobs:
     # Runs a set of commands using the runners shell
     - name: Run a multi-line script
       run: |
+        set -v
+        set -x
         #curl "https://api.github.com/repos/tilnow/testbot/issues" | grep -o -m 1 '"number": [0-9]*' | sed 's/^.*: //'
         let issuenum=$(curl "https://api.github.com/repos/tilnow/testbot/issues" | grep -o -m 1 '"number": [0-9]*' | sed 's/^.*: //' )
         echo "number of issues:" $issuenum
