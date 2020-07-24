@@ -26,10 +26,14 @@ jobs:
       run: |
         #curl "https://api.github.com/repos/tilnow/testbot/issues" | grep -o -m 1 '"number": [0-9]*' | sed 's/^.*: //'
         let issuenum=$(curl "https://api.github.com/repos/tilnow/testbot/issues" | grep -o -m 1 '"number": [0-9]*' | sed 's/^.*: //' )
-        echo $issuenum
+        echo "number of issues:" $issuenum
         for i in `seq 1 $issuenum`;
         do
         echo "https://api.github.com/repos/tilnow/testbot/issues/${i}/reactions"
+        curl "https://api.github.com/repos/tilnow/testbot/issues/${i}/reactions" -H "Accept: application/vnd.github.squirrel-girl-preview"
+        echo "and now with grep"
+        curl "https://api.github.com/repos/tilnow/testbot/issues/${i}/reactions" -H "Accept: application/vnd.github.squirrel-girl-preview" | grep "\"content\":" 
+        echo "and now with >"
         curl "https://api.github.com/repos/tilnow/testbot/issues/${i}/reactions" -H "Accept: application/vnd.github.squirrel-girl-preview" | grep "\"content\":" > tmp.txt
         echo "and now"
         cat tmp.txt
