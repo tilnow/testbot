@@ -37,5 +37,11 @@ jobs:
         echo $diff
         [ diff -gt 1] && echo "we have a winner"
         echo "after cat"
-        curl "https://api.github.com/repos/tilnow/testbot/issues/1" | grep -Po '"number":.*?[^\\]",' 
+        curl "https://api.github.com/repos/tilnow/testbot/issues" | grep -o -m 1 '"number": [0-9]*' | sed 's/^.*: //
+        let issuenum=$(curl "https://api.github.com/repos/tilnow/testbot/issues" | grep -o -m 1 '"number": [0-9]*' | sed 's/^.*: //)
+        for i in `seq 1 $issuenum`;
+        do
+        echo $i
+        done
+        curl   -X POST   -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/tilnow/testbot/issues/1/labels  -d '{"labels":["bug"]}'
 
