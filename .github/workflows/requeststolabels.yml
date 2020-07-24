@@ -32,7 +32,7 @@ jobs:
         for i in `seq 1 $issuenum`;
         do
 
-        curl "https://api.github.com/repos/tilnow/testbot/issues/${i}/reactions" -H "Accept: application/vnd.github.squirrel-girl-preview" | grep "\"content\":" || true > tmp.txt
+        curl "https://api.github.com/repos/tilnow/testbot/issues/${i}/reactions" -H "Accept: application/vnd.github.squirrel-girl-preview" | (grep "\"content\":" || true) > tmp.txt
 
         cat tmp.txt
         echo "+1"
