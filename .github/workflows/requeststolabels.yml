@@ -37,5 +37,5 @@ jobs:
         echo $diff
         [ diff -gt 1] && echo "we have a winner"
         echo "after cat"
-        curl "https://api.github.com/repos/tilnow/testbot/issues/0" | grep -m 1 -Po '"number":.*?[^\\]",' 
+        curl "https://api.github.com/repos/tilnow/testbot/issues/1" | grep -Po '"number":.*?[^\\]",' 
 
