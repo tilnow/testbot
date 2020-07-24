@@ -37,7 +37,7 @@ jobs:
         curl "https://api.github.com/repos/tilnow/testbot/issues/${i}/reactions" -H "Accept: application/vnd.github.squirrel-girl-preview" >>atmp.txt
         echo "atmp" 
         cat atmp.txt
-        grep "\"content\":" <atmp.txt
+        grep "\"content\":" <atmp.txt || true
         echo "now try and fail with rec"
         rec=$(curl "https://api.github.com/repos/tilnow/testbot/issues/${i}/reactions" -H "Accept: application/vnd.github.squirrel-girl-preview")
         echo $rec
