@@ -41,7 +41,7 @@ jobs:
         echo "-1"
         cat tmp.txt | (grep "\-1" || true) | wc -l
         tminus=$(cat tmp.txt | (grep "\-1" || true) | wc -l)
-        let diff=tplus-tminus
+        $diff = $tplus - $tminus
         echo $diff
         [ $diff -gt 1 ] && echo "we have a winner"
         echo "after cat"
