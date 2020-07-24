@@ -35,7 +35,7 @@ jobs:
         echo "skip grep"
         echo "stm" >atmp.txt
         curl "https://api.github.com/repos/tilnow/testbot/issues/${i}/reactions" -H "Accept: application/vnd.github.squirrel-girl-preview" >>atmp.txt
-        echo "atmp" 
+        echo "atmp with true" 
         cat atmp.txt
         grep "\"content\":" <atmp.txt || true
         echo "now try and fail with rec"
