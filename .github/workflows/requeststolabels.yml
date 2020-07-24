@@ -28,8 +28,14 @@ jobs:
         echo "and now"
         cat tmp.txt
         echo "+1"
-        cat tmp.txt | grep "+1" | wc -l
+        cat tmp.txt | grep "\+1" | wc -l
+        tplus=$(cat tmp.txt | grep "\+1" | wc -l)
         echo "-1"
-        cat tmp.txt | grep "-1" | wc -l
+        cat tmp.txt | grep "\-1" | wc -l
+        tminus=$(cat tmp.txt | grep "\-1" | wc -l)
+        let diff=tplus-tminus
+        echo $diff
+        [ diff -gt 1] && echo "we have a winner"
         echo "after cat"
+        curl "https://api.github.com/repos/tilnow/testbot/issues/0" | grep -m 1 -Po '"number":.*?[^\\]",' 
 
