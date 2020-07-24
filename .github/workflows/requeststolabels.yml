@@ -31,7 +31,8 @@ jobs:
         do
         echo "https://api.github.com/repos/tilnow/testbot/issues/${i}/reactions"
         echo "skip grep"
-        curl "https://api.github.com/repos/tilnow/testbot/issues/${i}/reactions" -H "Accept: application/vnd.github.squirrel-girl-preview" >atmp.txt
+        echo "stm" >atmp.txt
+        curl "https://api.github.com/repos/tilnow/testbot/issues/${i}/reactions" -H "Accept: application/vnd.github.squirrel-girl-preview" >>atmp.txt
         echo "atmp" 
         cat atmp.txt
         grep "\"content\":" <atmp.txt
