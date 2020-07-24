@@ -30,7 +30,7 @@ jobs:
         for i in `seq 1 $issuenum`;
         do
         echo "https://api.github.com/repos/tilnow/testbot/issues/${i}/reactions"
-        let rec=$(curl "https://api.github.com/repos/tilnow/testbot/issues/${i}/reactions" -H "Accept: application/vnd.github.squirrel-girl-preview")
+        rec=$(curl "https://api.github.com/repos/tilnow/testbot/issues/${i}/reactions" -H "Accept: application/vnd.github.squirrel-girl-preview")
         echo $rec
         [ -z "$rec" ] && echo "Empty" || echo "Not empty"
         echo "now try to grep variable"
