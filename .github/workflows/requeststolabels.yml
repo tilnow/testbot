@@ -41,8 +41,8 @@ jobs:
         echo "-1"
         cat tmp.txt | (grep "\-1" || true) | wc -l
         tminus=$(cat tmp.txt | (grep "\-1" || true) | wc -l)
-        echo "before let"
-        let dif=$tplus-$tminus
+        echo "before let" $tplus $tminus
+        let "dif=$tplus-$tminus"
         echo "after let"
         echo $dif
         echo "before compare"
