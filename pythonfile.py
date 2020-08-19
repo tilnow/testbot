@@ -32,6 +32,6 @@ print(knack_app.info())
 records=knack_app.get('object_2')
 print("the records from knack")
 print([(x,vars(x)) for x in records])
-print(json.dumps(records,indent=2))
+#print(json.dumps(records,indent=2))#record is not serializable
 print(os.listdir(github_repository_base))
 client.run(sys.argv[1])
