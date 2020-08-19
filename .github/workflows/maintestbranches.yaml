@@ -18,7 +18,9 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
       with:
+   #needs to be name of branch we run on. in production will be main branch so we will leave this out
          ref: abranch
+         
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -26,13 +28,15 @@ jobs:
 
 
     # Runs a set of commands using the runners shell
+       
     - name: Run a multi-line script
       env:
          DISCORD_CODE: ${{ secrets.DISCORD_CODE }}
+         KNACK_APPID: ${{ secrets.KNACK_APPID }}
+         KNACK_CODE: ${{ secrets.KNACK_CODE }}
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo null
-        cat $GITHUB_WORKSPACE/afile
+        echo before
         bash bashscript
-        echo "did i create a file" > $GITHUB_WORKSPACE/alsoafile
-        python $GITHUB_WORKSPACE/pythonfile.py $DISCORD_CODE
-        echo also null
+        python $GITHUB_WORKSPACE/pythonfile.py $DISCORD_CODE $KNACK_APPID $KNACK_CODE $GITHUB_TOKEN $GITHUB_WORKSPACE
+        echo also after
