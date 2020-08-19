@@ -27,7 +27,7 @@ async def on_message(message):
         
 knack_app = knackpy.App(app_id=sys.argv[2],  api_key=sys.argv[3])
 github_token=sys.argv[4]
-github_repository_base=argv[5]
+github_repository_base=sys.argv[5]
 print(knack_app.info())
 records=knack_app.get('object_2')
 print("the records from knack")
