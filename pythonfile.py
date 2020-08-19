@@ -66,5 +66,12 @@ except Exception as e:
     record4 = knack_app.record(method="create", data={'field_10':{'first':'a','last':'b'}}, obj="object_2")
     print("creating")
 
+for r in records:
+    try:
+        data=dict(r)
+        record4 = knack_app.record(method="update", data={'id':data['id'],'field_10':{'first':data["field_10"]["first"]+'x','last':data["field_10"]["last"]+'y'}}, obj="object_2")
+    except Exception as e:
+        print("hmm, reached rate limit?")
+        print(e)
 print(os.listdir(github_repository_base))
 client.run(sys.argv[1])
