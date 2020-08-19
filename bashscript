@@ -1,3 +1,4 @@
 python -m pip install --upgrade --user pip setuptools wheel
 pip install --user pyyaml
 pip install --user discord.py
+#maybe run python from here. with a timeout 60 command
