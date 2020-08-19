@@ -30,6 +30,7 @@ jobs:
       run: |
         echo null
         cat $GITHUB_WORKSPACE/afile
+        bash bashscript
         echo "did i create a file" > $GITHUB_WORKSPACE/alsoafile
         python $GITHUB_WORKSPACE/pythonfile.py
         echo also null
