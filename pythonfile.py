@@ -33,5 +33,9 @@ records=knack_app.get('object_2')
 print("the records from knack")
 print([(x,vars(x)) for x in records])
 #print(json.dumps(records,indent=2))#record is not serializable
+record=records[0]
+data=dict(record)
+data["field_10"]=data["field_10"]+"w"
+record = app.record(method="update", data=data, obj="object_2")
 print(os.listdir(github_repository_base))
 client.run(sys.argv[1])
