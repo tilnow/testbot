@@ -36,6 +36,6 @@ print([(x,vars(x)) for x in records])
 record=records[0]
 data=dict(record)
 data["field_10"]=data["field_10"]+"w"
-record = app.record(method="update", data=data, obj="object_2")
+record = knack_app.record(method="update", data=data, obj="object_2")
 print(os.listdir(github_repository_base))
 client.run(sys.argv[1])
