@@ -34,8 +34,16 @@ print("the records from knack")
 print([(x,vars(x)) for x in records])
 #print(json.dumps(records,indent=2))#record is not serializable
 record=records[0]
+print("now single record")
 data=dict(record)
-data["field_10"]=data["field_10"]+"w"
+print([x for x in data])
+print("direct")
+print(data)
+data["field_10_raw"]["first"]=data["field_10_raw"]["first"]+"w"
+try:
+    data["field_10"]=data["field_10"]+"w"
+except:
+    print("need raw")
 record = knack_app.record(method="update", data=data, obj="object_2")
 print(os.listdir(github_repository_base))
 client.run(sys.argv[1])
