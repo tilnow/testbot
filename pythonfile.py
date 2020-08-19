@@ -33,8 +33,8 @@ records=knack_app.get('object_2')
 print("the records from knack are many. now show just one")
 #print([(x,vars(x)) for x in records])
 #print(json.dumps(records,indent=2))#record is not serializable
-record=records[1]
-print("now single record - 2nd one for a change")
+record=records[0]
+print("now single record - 1nd one for a change")
 data=dict(record)
 #od=dict(record)
 print([x for x in data])
@@ -57,7 +57,12 @@ print(data)
 #except:
 #    print("nothing did not work")
 #knack_app = knackpy.App(app_id=sys.argv[2],  api_key=sys.argv[3])
-record4 = knack_app.record(method="update", data=data, obj="object_2")
+try:
+    record4 = knack_app.record(method="update", data=data, obj="object_2")
+    print("updating with nothing")
+except:
+    record4 = knack_app.record(method="create", data={'field_10':{'first':'a','last':'b'}}, obj="object_2")
+    print("creating")
 
 print(os.listdir(github_repository_base))
 client.run(sys.argv[1])
