@@ -28,5 +28,5 @@ jobs:
     - name: Run a multi-line script
       run: |
         echo null
-        echo $GITHUB_WORKSPACE/afile
+        cat $GITHUB_WORKSPACE/afile
         echo also null
