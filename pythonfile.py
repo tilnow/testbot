@@ -42,6 +42,7 @@ print("direct")
 print(data)
 
 try:
+    knack_app = knackpy.App(app_id=sys.argv[2],  api_key=sys.argv[3])
     data["field_10"]["first"]="notjanet"
     record2 = knack_app.record(method="update", data=data, obj="object_2")
 except:
@@ -55,6 +56,7 @@ try:
     record3 = knack_app.record(method="update", data=od, obj="object_2")
 except:
     print("nothing did not work")
+knack_app = knackpy.App(app_id=sys.argv[2],  api_key=sys.argv[3])
 record4 = knack_app.record(method="create", data=data, obj="object_2")
 
 print(os.listdir(github_repository_base))
