@@ -60,7 +60,8 @@ print(data)
 try:
     record4 = knack_app.record(method="update", data=data, obj="object_2")
     print("updating with nothing")
-except:
+except Exception as e:
+    print(e)
     record4 = knack_app.record(method="create", data={'field_10':{'first':'a','last':'b'}}, obj="object_2")
     print("creating")
 
