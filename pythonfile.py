@@ -30,8 +30,8 @@ github_token=sys.argv[4]
 github_repository_base=sys.argv[5]
 print(knack_app.info())
 records=knack_app.get('object_2')
-print("the records from knack")
-print([(x,vars(x)) for x in records])
+print("the records from knack are many. now show just one")
+#print([(x,vars(x)) for x in records])
 #print(json.dumps(records,indent=2))#record is not serializable
 record=records[0]
 print("now single record")
@@ -40,24 +40,22 @@ od=dict(record)
 print([x for x in data])
 print("direct")
 print(data)
-try:
-    data["field_10"]["first"]=data["field_10"]["first"]+"w"
-    record1 = knack_app.record(method="update", data=data, obj="object_2")
-except:
-    print("+w did not work")
+
 try:
     data["field_10"]["first"]="notjanet"
     record2 = knack_app.record(method="update", data=data, obj="object_2")
 except:
     print("not janet did not work")
 try:
+    data["field_10"]["first"]=data["field_10"]["first"]+"w"
+    record1 = knack_app.record(method="update", data=data, obj="object_2")
+except:
+    print("+w did not work")
+try:
     record3 = knack_app.record(method="update", data=od, obj="object_2")
 except:
     print("nothing did not work")
-try:
-    record4 = knack_app.record(method="create", data=od, obj="object_2")
-except:
-    print("create did not work")
+record4 = knack_app.record(method="create", data=data, obj="object_2")
 
 print(os.listdir(github_repository_base))
 client.run(sys.argv[1])
