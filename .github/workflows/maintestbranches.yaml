@@ -17,6 +17,8 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+      with:
+         ref: abranch
 
     # Runs a single command using the runners shell
     - name: Run a one-line script
@@ -25,6 +27,6 @@ jobs:
     # Runs a set of commands using the runners shell
     - name: Run a multi-line script
       run: |
-        ls -aR $GITHUB_WORKSPACE
         echo null
+        echo $GITHUB_WORKSPACE/afile
         echo also null
