@@ -36,15 +36,24 @@ print([(x,vars(x)) for x in records])
 record=records[0]
 print("now single record")
 data=dict(record)
+od=dict(record)
 print([x for x in data])
 print("direct")
 print(data)
 try:
     data["field_10"]["first"]=data["field_10"]["first"]+"w"
-    record = knack_app.record(method="update", data=data, obj="object_2")try:
+    record = knack_app.record(method="update", data=data, obj="object_2")
 except:
     print("+w did not work")
+try:
     data["field_10"]["first"]="notjanet"
     record = knack_app.record(method="update", data=data, obj="object_2")
+except:
+    print("not janet did not work")
+try:
+    record = knack_app.record(method="update", data=od, obj="object_2")
+except:
+    print("nothing did not work")
+
 print(os.listdir(github_repository_base))
 client.run(sys.argv[1])
