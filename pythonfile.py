@@ -57,7 +57,7 @@ print(data)
 #except:
 #    print("nothing did not work")
 #knack_app = knackpy.App(app_id=sys.argv[2],  api_key=sys.argv[3])
-record4 = knack_app.record(method="create", data=data, obj="object_2")
+record4 = knack_app.record(method="update", data=data, obj="object_2")
 
 print(os.listdir(github_repository_base))
 client.run(sys.argv[1])
