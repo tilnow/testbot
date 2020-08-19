@@ -33,8 +33,8 @@ records=knack_app.get('object_2')
 print("the records from knack are many. now show just one")
 #print([(x,vars(x)) for x in records])
 #print(json.dumps(records,indent=2))#record is not serializable
-record=records[0]
-print("now single record")
+record=records[1]
+print("now single record - 2nd one for a change")
 data=dict(record)
 od=dict(record)
 print([x for x in data])
