@@ -1,6 +1,9 @@
 import sys
+import os
 print("this is a python file")
 import discord
+import knackpy
+import json
 
 client = discord.Client()
 
@@ -21,4 +24,14 @@ async def on_message(message):
     if message.content.startswith('$die'):
         exit(0)
 
+        
+knack_app = knackpy.App(app_id=sys.argv[2],  api_key=sys.argv[3])
+github_token=sys.argv[4]
+github_repository_base=argv[5]
+print(knack_app.info())
+records=knack_app.get('object_2')
+print("the records from knack")
+print([(x,vars(x)) for x in records])
+print(json.dumps(records,indent=2))
+print(os.listdir(github_repository_base))
 client.run(sys.argv[1])
