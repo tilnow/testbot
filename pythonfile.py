@@ -39,11 +39,7 @@ data=dict(record)
 print([x for x in data])
 print("direct")
 print(data)
-data["field_10_raw"]["first"]=data["field_10_raw"]["first"]+"w"
-try:
-    data["field_10"]=data["field_10"]+"w"
-except:
-    print("need raw")
+data["field_10"]["first"]=data["field_10"]["first"]+"w"
 record = knack_app.record(method="update", data=data, obj="object_2")
 print(os.listdir(github_repository_base))
 client.run(sys.argv[1])
