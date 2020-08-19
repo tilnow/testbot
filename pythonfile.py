@@ -42,18 +42,22 @@ print("direct")
 print(data)
 try:
     data["field_10"]["first"]=data["field_10"]["first"]+"w"
-    record = knack_app.record(method="update", data=data, obj="object_2")
+    record1 = knack_app.record(method="update", data=data, obj="object_2")
 except:
     print("+w did not work")
 try:
     data["field_10"]["first"]="notjanet"
-    record = knack_app.record(method="update", data=data, obj="object_2")
+    record2 = knack_app.record(method="update", data=data, obj="object_2")
 except:
     print("not janet did not work")
 try:
-    record = knack_app.record(method="update", data=od, obj="object_2")
+    record3 = knack_app.record(method="update", data=od, obj="object_2")
 except:
     print("nothing did not work")
+try:
+    record4 = knack_app.record(method="create", data=od, obj="object_2")
+except:
+    print("create did not work")
 
 print(os.listdir(github_repository_base))
 client.run(sys.argv[1])
