@@ -58,7 +58,7 @@ print(data)
 #    print("nothing did not work")
 #knack_app = knackpy.App(app_id=sys.argv[2],  api_key=sys.argv[3])
 try:
-    record4 = knack_app.record(method="update", data={'field_10':{'first':'x','last':'y'}}, obj="object_2")
+    record4 = knack_app.record(method="update", data={'id':data['id'],'field_10':{'first':'x','last':'y'}}, obj="object_2")
     print("updating with nothing")
 except Exception as e:
     print("hmm, got to exception")
