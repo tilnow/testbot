@@ -9,6 +9,7 @@ async def on_ready():
     print('We have logged in as {0.user}'.format(client),  client.guilds, client.guilds[0].text_channels)
     for u in client.guilds[0].members:
         print(u.name, u, [x.name for x in u.roles])
+    exit(0) #do not want program actually running 
 
 @client.event
 async def on_message(message):
