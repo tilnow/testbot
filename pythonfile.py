@@ -36,27 +36,27 @@ print("the records from knack are many. now show just one")
 record=records[1]
 print("now single record - 2nd one for a change")
 data=dict(record)
-od=dict(record)
+#od=dict(record)
 print([x for x in data])
 print("direct")
 print(data)
 
-try:
-    knack_app = knackpy.App(app_id=sys.argv[2],  api_key=sys.argv[3])
-    data["field_10"]["first"]="notjanet"
-    record2 = knack_app.record(method="update", data=data, obj="object_2")
-except:
-    print("not janet did not work")
-try:
-    data["field_10"]["first"]=data["field_10"]["first"]+"w"
-    record1 = knack_app.record(method="update", data=data, obj="object_2")
-except:
-    print("+w did not work")
-try:
-    record3 = knack_app.record(method="update", data=od, obj="object_2")
-except:
-    print("nothing did not work")
-knack_app = knackpy.App(app_id=sys.argv[2],  api_key=sys.argv[3])
+#try:
+#    knack_app = knackpy.App(app_id=sys.argv[2],  api_key=sys.argv[3])
+#    data["field_10"]["first"]="notjanet"
+#    record2 = knack_app.record(method="update", data=data, obj="object_2")
+#except:
+#    print("not janet did not work")
+#try:
+#    data["field_10"]["first"]=data["field_10"]["first"]+"w"
+#    record1 = knack_app.record(method="update", data=data, obj="object_2")
+#except:
+#    print("+w did not work")
+#try:
+#    record3 = knack_app.record(method="update", data=od, obj="object_2")
+#except:
+#    print("nothing did not work")
+#knack_app = knackpy.App(app_id=sys.argv[2],  api_key=sys.argv[3])
 record4 = knack_app.record(method="create", data=data, obj="object_2")
 
 print(os.listdir(github_repository_base))
