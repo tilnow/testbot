@@ -52,6 +52,16 @@ for r in records: #this should create a propert dict and also save it to file fo
     l.append(dict(r))
 with open('members.json', 'w') as fp:
     json.dump(l, fp)
+#now upload the list so we use knack as a file server
+file_id=dict(knack_app.get('object_28')[0])['id']
+res = app.upload(
+     container="object_28",  # must be an object key or name
+     field="field_595",
+     path="members.json",
+     asset_type="file",  # must be 'file' or 'image', depending on field type
+     record_id=file_id
+)
+print("res is:",res)
 
 print(os.listdir(github_repository_base))
 client.run(sys.argv[1])
