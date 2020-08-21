@@ -56,7 +56,7 @@ with open('members.json', 'w') as fp:
 herebefiles=knack_app.get('object_28')
 print("for the record:",dict(herebefiles[0]))
 file_id=dict(herebefiles[0])['id']
-res = app.upload(
+res = knack_app.upload(
      container="object_28",  # must be an object key or name
      field="field_595",
      path="members.json",
