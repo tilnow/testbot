@@ -4,6 +4,7 @@ print("this is a python file")
 import discord
 import knackpy
 import json
+import ast
 
 client = discord.Client()
 
@@ -41,8 +42,9 @@ print([x for x in data])
 print("direct")
 print(data)
 links_number="field_594" #will change if/when we upload again
-print("links field:", data[links_number], json.loads(data[links_number]))
-data[links_number]=json.loads(data[links_number])
+j=ast.literal_eval(data[links_number])
+print("links field:", data[links_number], j)
+data[links_number]=j
 print("now unfolded the links:",data)
 #to update a record, send only the id and the data to be changed in payload:     record4 = knack_app.record(method="update", data={'id':data['id'],'field_10':{'first':data["field_10"]["first"]+'x','last':'y'}}, obj="object_2")
 l=[]
