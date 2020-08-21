@@ -29,49 +29,22 @@ knack_app = knackpy.App(app_id=sys.argv[2],  api_key=sys.argv[3])
 github_token=sys.argv[4]
 github_repository_base=sys.argv[5]
 print(knack_app.info())
-records=knack_app.get('object_2')
+records=knack_app.get('object_27')
 print("the records from knack are many. now show just one")
 #print([(x,vars(x)) for x in records])
 #print(json.dumps(records,indent=2))#record is not serializable
-record=records[0]
+record=records[4]
 print("now single record - 1nd one for a change")
 data=dict(record)
 #od=dict(record)
 print([x for x in data])
 print("direct")
 print(data)
+print("links field:", data["links"], json.loads(data["links"]))
+data["links"]=json.loads(data["links"])
+print("now unfolded the links:",data)
+#to update, send only the id and the data to be changed in payload:     record4 = knack_app.record(method="update", data={'id':data['id'],'field_10':{'first':data["field_10"]["first"]+'x','last':'y'}}, obj="object_2")
 
-#try:
-#    knack_app = knackpy.App(app_id=sys.argv[2],  api_key=sys.argv[3])
-#    data["field_10"]["first"]="notjanet"
-#    record2 = knack_app.record(method="update", data=data, obj="object_2")
-#except:
-#    print("not janet did not work")
-#try:
-#    data["field_10"]["first"]=data["field_10"]["first"]+"w"
-#    record1 = knack_app.record(method="update", data=data, obj="object_2")
-#except:
-#    print("+w did not work")
-#try:
-#    record3 = knack_app.record(method="update", data=od, obj="object_2")
-#except:
-#    print("nothing did not work")
-#knack_app = knackpy.App(app_id=sys.argv[2],  api_key=sys.argv[3])
-try:
-    record4 = knack_app.record(method="update", data={'id':data['id'],'field_10':{'first':data["field_10"]["first"]+'x','last':'y'}}, obj="object_2")
-    print("updating with nothing")
-except Exception as e:
-    print("hmm, got to exception")
-    print(e)
-    record4 = knack_app.record(method="create", data={'field_10':{'first':'a','last':'b'}}, obj="object_2")
-    print("creating")
 
-for r in records:
-    try:
-        data=dict(r)
-        record4 = knack_app.record(method="update", data={'id':data['id'],'field_10':{'first':data["field_10"]["first"]+'x','last':data["field_10"]["last"]+'y'}}, obj="object_2")
-    except Exception as e:
-        print("hmm, reached rate limit?")
-        print(e)
 print(os.listdir(github_repository_base))
 client.run(sys.argv[1])
