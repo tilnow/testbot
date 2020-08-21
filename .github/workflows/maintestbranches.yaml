@@ -44,3 +44,10 @@ jobs:
       uses: 'actions/upload-artifact@v2'
       with:
               path: 'members.json'
+    - name: 'update file with link file'
+      run: |
+          git config user.name tilnow
+          git config user.email tilnowah@gmail.com
+          git add .
+          git commit -m "updated linktomembers"
+          git push  
