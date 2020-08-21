@@ -52,6 +52,8 @@ l=[]
 for r in records: #this should create a propert dict and also save it to file for use as an artifact
     rr=r.format()
     data=dict(rr)
+    print(data)
+    print("links=", data["links"])
     data["links"]=ast.literal_eval(data["links"])
     l.append(data)
 with open('members.json', 'w') as fp:
