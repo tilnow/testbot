@@ -25,8 +25,8 @@ async def on_message(message):
     if message.content.startswith('$die'):
         exit(0)
 
-        
-knack_app = knackpy.App(app_id=sys.argv[2],  api_key=sys.argv[3])
+app_id=sys.argv[2]        
+knack_app = knackpy.App(app_id=app_id,  api_key=sys.argv[3])
 github_token=sys.argv[4]
 github_repository_base=sys.argv[5]
 print(knack_app.info())
@@ -52,8 +52,8 @@ l=[]
 for r in records: #this should create a propert dict and also save it to file for use as an artifact
     rr=r.format()
     data=dict(rr)
-    print(data)
-    print("links=", data["links"])
+    #print(data)
+    #print("links=", data["links"])
     if data["links"]:
        data["links"]=ast.literal_eval(data["links"])
     l.append(data)
@@ -71,6 +71,12 @@ res = knack_app.upload(
      record_id=file_id
 )
 print("res is:",res)
+loc=res['field_595_raw']['url']
+if res['field_595_raw']['application_id']=='***':
+    loc=loc.replace("***",app_id)
+with open('linktomembers', 'w') as fp:#thsi will be pushed to github. we hope
+    fp.write(loc)
+    
 
 print(os.listdir(github_repository_base))
 client.run(sys.argv[1])
