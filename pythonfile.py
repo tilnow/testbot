@@ -53,7 +53,9 @@ for r in records: #this should create a propert dict and also save it to file fo
 with open('members.json', 'w') as fp:
     json.dump(l, fp)
 #now upload the list so we use knack as a file server
-file_id=dict(knack_app.get('object_28')[0])['id']
+herebefiles=knack_app.get('object_28')
+print("for the record:",dict(herebefiles[0]))
+file_id=dict(herebefiles[0])['id']
 res = app.upload(
      container="object_28",  # must be an object key or name
      field="field_595",
