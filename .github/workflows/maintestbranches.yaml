@@ -46,6 +46,7 @@ jobs:
               path: 'members.json'
     - name: 'update file with link file'
       run: |
+          echo "members.json" > .gitignore
           git config user.name tilnow
           git config user.email tilnowah@gmail.com
           git add .
