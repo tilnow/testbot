@@ -40,8 +40,9 @@ data=dict(record)
 print([x for x in data])
 print("direct")
 print(data)
-print("links field:", data["links"], json.loads(data["links"]))
-data["links"]=json.loads(data["links"])
+links_number="field_594" #will change if/when we upload again
+print("links field:", data[links_number], json.loads(data[links_number]))
+data[links_number]=json.loads(data[links_number])
 print("now unfolded the links:",data)
 #to update a record, send only the id and the data to be changed in payload:     record4 = knack_app.record(method="update", data={'id':data['id'],'field_10':{'first':data["field_10"]["first"]+'x','last':'y'}}, obj="object_2")
 l=[]
