@@ -38,6 +38,7 @@ jobs:
       run: |
         echo before
         bash bashscript
+        echo between bash and python
         python $GITHUB_WORKSPACE/pythonfile.py $DISCORD_CODE $KNACK_APPID $KNACK_CODE $GITHUB_TOKEN $GITHUB_WORKSPACE
         echo also after
     - name: 'create artifact'
