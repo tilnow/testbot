@@ -63,24 +63,28 @@ try:
         for i in l:
             found=False
             for j in dl:
-                if i["discordID"]==j[0]:#then change to discord_user_id and add code to check if user name changed and if yes, update field 586
+                #if i["discordID"]==j[0]:#then change to discord_user_id and add code to check if user name changed and if yes, update field 586
+                if i['discord_user_id']==j[2]
                     found=True
                     if [l for l in nn(i["discord roles"])+nn(j[1]) if (l in nn(i["discord roles"])) ^ (l in nn(j[1]))]:
                         tupd.append({"id":i["id"],"field_591":j[1]}) #we assume that discord rules over knack and we simply overwrite
                         i['discord roles']=j[1] #also update l, as it is what we will be using
-                    
+                    if i['discordID']!=j[0]: #means name was updated, as user_id wins
+                        print ("seems like we have a name update here:",i,j)
+                        tupd.append({"id":i["id"],"field_586":j[0]}) #we assume that discord rules over knack and we simply overwrite
+                        i['discordID']=j[0]
                     break
             if found==False:
-                print("consider deleting member not on discord (but remember anne) and maybe they just changed their discord id:",i["id"],i["title"])
+                print("consider deleting member not on discord (but remember anne) :",i["id"],i["title"])
                 todelete.append(i)
         #just once, copy over the discord_user_id and then comment away
-        for i in l:
-            nm=i["discordID"]
-            for j in dl:
-                if j[0]==nm:
-                    tupd.append({"id":i["id"],"field_596":j[2]})
-                    i['discord_user_id']=j[2]
-                    break
+        #for i in l:
+        #    nm=i["discordID"]
+        #    for j in dl:
+        #        if j[0]==nm:
+        #            tupd.append({"id":i["id"],"field_596":j[2]})
+        #            i['discord_user_id']=j[2]
+        #            break
         print("list of roles that need to be updated in knack:",tupd,flush=True)
         for x in tupd:
             res = knack_app.record(method="update", data=x, obj="object_27")
@@ -89,7 +93,7 @@ try:
         existing=[i["discord_user_id"] for i in l] #by now we HAVE discord_user_id
         got=[i[2] for i in dl] #user_id more reliable than username
         toadd=[x for x in got if x not in existing]
-        print("consider adding these new madeyaks to members, or maybe they just change dthier discord id",toadd, flush=True) #IRL there should probbaly be a form to fill sent to knack via some other way. maybe manual entry
+        print("consider adding these new madeyaks to members",toadd, flush=True) #IRL there should probbaly be a form to fill sent to knack via some other way. maybe manual entry
 
         make_and_write_members_file()
         exit(0) #do not want program actually running 
