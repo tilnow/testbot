@@ -1,6 +1,6 @@
-# This is a test workflow, trying to be in a branch. using same names as in main branch
-
-name: TESTBRANCHES
+# this workflow runs in master but, for now, executes bash and python scripts in "abranch" that read data from knack and discord 
+# and create a servable file (members.json) on knack. it should also update knack if/as needed
+name: BUILDMEMBERDATA
 
 # Controls when the action will run. Triggers the workflow manually only
 on:
