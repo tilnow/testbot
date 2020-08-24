@@ -78,15 +78,14 @@ try:
                 print("consider deleting member not on discord (but remember anne) :",i["id"],i["title"])
                 todelete.append(i)
         #just once, copy over the discord_user_id and then comment away. and then again due to a rounding error of some sort
-        for i in l:
-            nm=i["discordID"]
-            for j in dl:
-                if j[0]==nm:
-                    print("am updating",i['discord_user_id'],'to',j[2],str(j[2]),j[3].id)
-                    tupd.append({"id":i["id"],"field_596":str(j[2])})
-
-                    i['discord_user_id']=j[2]
-                    break
+        #for i in l:
+        #    nm=i["discordID"]
+        #    for j in dl:
+        #        if j[0]==nm:
+        #            print("am updating",i['discord_user_id'],'to',j[2],str(j[2]),j[3].id)
+        #            tupd.append({"id":i["id"],"field_596":str(j[2])})
+        #            i['discord_user_id']=j[2]
+        #            break
         print("list of roles that need to be updated in knack:",tupd,flush=True)
         for x in tupd:
             res = knack_app.record(method="update", data=x, obj="object_27")
