@@ -45,11 +45,13 @@ try:
         tupd=[]
         toadd=[]
         todelete=[]
+        print("now show member count",len(client.guilds[0].members),client.guilds[0].members[1],flush=True)
         for u in client.guilds[0].members:
           if('madeyak' in [x.name for x in u.roles]): # for now, read only made yaks
             r=[x.name for x in u.roles if x.name not in ['@everyone','yak']]
             dl.append(str(u),r)
             print(u.name, u, r, flush=True)
+        print("l,dl is:", len(l),len(dl))
         for i in l:
             found=False
             for j in dl:
