@@ -1,3 +1,3 @@
 import sys
-print(sys.argc)
+print(len(sys.argv))
 print("i am little...")
