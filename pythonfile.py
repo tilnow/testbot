@@ -67,7 +67,7 @@ try:
                     found=True
                     if [l for l in nn(i["discord roles"])+nn(j[1]) if (l in nn(i["discord roles"])) ^ (l in nn(j[1]))]:
                         tupd.append({"id":i["id"],"field_591":j[1]}) #we assume that discord rules over knack and we simply overwrite
-                        l['discord roles']=j[1] #also update l, as it is what we will be using
+                        i['discord roles']=j[1] #also update l, as it is what we will be using
                     
                     break
             if found==False:
@@ -79,7 +79,7 @@ try:
             for j in dl:
                 if j[0]==nm:
                     tupd.append({"id":i["id"],"field_596":j[2]})
-                    l['discord_user_id']=j[2]
+                    i['discord_user_id']=j[2]
                     break
         print("list of roles that need to be updated in knack:",tupd,flush=True)
         for x in tupd:
