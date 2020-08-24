@@ -53,12 +53,16 @@ try:
             dl.append((str(u),r))
             print(u.name, u, r, flush=True)
         print("l,dl is:", len(l),len(dl),flush=True)
+        def nn(x):
+            if x:
+                return x
+            return []
         for i in l:
             found=False
             for j in dl:
                 if i["discordID"]==j[0]:
                     found=True
-                    if [l for l in i["discord roles"]+j[1] if (l in i["discord roles"]) ^ (l in j[1])]:
+                    if [l for l in nn(i["discord roles"])+nn(j[1]) if (l in i["discord roles"]) ^ (l in j[1])]:
                         tupd.append({"id":i["id"],"discord roles":j[1]}) #we assume that discord rules over knack and we simply overwrite
                     break
             if found==False:
