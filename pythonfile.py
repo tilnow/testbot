@@ -58,8 +58,8 @@ try:
             for j in dl:
                 if i["discordID"]==j[0]:
                     found=True
-                    if set(i["discord roles"]+['stam']).difference(set(j[1]+['stam'])):
-                        tupd.append({"id":i["id"],"discord roles":j[1]})
+                    if [l for l in i["discord roles"]+j[1] if (l in i["discord roles"]) ^ (l in j[1])]:
+                        tupd.append({"id":i["id"],"discord roles":j[1]}) #we assume that discord rules over knack and we simply overwrite
                     break
             if found==False:
                 print("consider deleting member not on discord (but remember anne):",i["id"],i["title"])
