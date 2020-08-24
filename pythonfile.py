@@ -58,7 +58,7 @@ try:
             for j in dl:
                 if i["discordID"]==j[0]:
                     found=True
-                    if set(i["discord roles"]).difference(set(j[1])):
+                    if set(i["discord roles"]+['stam']).difference(set(j[1]+['stam'])):
                         tupd.append({"id":i["id"],"discord roles":j[1]})
                     break
             if found==False:
