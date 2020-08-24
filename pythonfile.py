@@ -63,8 +63,8 @@ try:
         for i in l:
             found=False
             for j in dl:
-                #if i["discordID"]==j[0]:#then change to discord_user_id and add code to check if user name changed and if yes, update field 586
-                if i['discord_user_id']==j[2]
+                #if i["discordID"]==j[0]: #then change to discord_user_id and add code to check if user name changed and if yes, update field 586
+                if i['discord_user_id']==j[2]:
                     found=True
                     if [l for l in nn(i["discord roles"])+nn(j[1]) if (l in nn(i["discord roles"])) ^ (l in nn(j[1]))]:
                         tupd.append({"id":i["id"],"field_591":j[1]}) #we assume that discord rules over knack and we simply overwrite
