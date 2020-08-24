@@ -36,9 +36,13 @@ jobs:
          KNACK_CODE: ${{ secrets.KNACK_CODE }}
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+        set -x
+        set -v
         echo before
         bash bashscript
-        echo between bash and python
+        echo "between bash and python"
+        python -c "print('ahha')"
+        echo "after test python"
         python $GITHUB_WORKSPACE/pythonfile.py $DISCORD_CODE $KNACK_APPID $KNACK_CODE $GITHUB_TOKEN $GITHUB_WORKSPACE
         echo also after
     - name: 'create artifact'
