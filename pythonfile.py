@@ -46,7 +46,7 @@ try:
         toadd=[]
         todelete=[]
         print("now show member count",len(client.guilds[0].members),client.guilds[0].members[1],flush=True)
-        uu=[u in client.guilds[0].members] #maybe will be faster?
+        uu=[u for u in client.guilds[0].members] #maybe will be faster?
         for u in uu:
           if('madeyak' in [x.name for x in u.roles]): # for now, read only made yaks
             r=[x.name for x in u.roles if x.name not in ['@everyone','yak']]
