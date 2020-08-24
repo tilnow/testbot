@@ -7,16 +7,67 @@ import json
 import ast
 
 client = discord.Client()
+dl=[]
+tupd=[]
+
+def make_and_write_members_file():
+    with open('members.json', 'w') as fp: #need to make sure this happens after discord bot...
+        json.dump(l, fp)
+
+    #now upload the list so we use knack as a file server
+    herebefiles=knack_app.get('object_28')
+    print("for the record:",dict(herebefiles[0])) #indeed. application is listed as *** rather than "5f286f84d61121001594a056"
+    file_id=dict(herebefiles[0])['id']
+
+    res = knack_app.upload(
+         container="object_28",  # must be an object key or name
+         field="field_595",
+         path="members.json",
+         asset_type="file",  # must be 'file' or 'image', depending on field type
+         record_id=file_id
+    )
+    print("res is:",res)
+    loc=res['field_595_raw']['url']
+    if res['field_595_raw']['application_id']=='***':
+        loc=loc.replace("***",app_id)
+    with open('linktomembers', 'w') as fp:#this will be pushed to github. we hope, due to .git setup in bash file. mayeb it needs some finetuning. shoudl eb excluding members.json
+        fp.write(loc)
 
 @client.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client),  client.guilds, client.guilds[0].text_channels)
+    global dl,l
+    print('We have logged in as {0.user}'.format(client),  client.guilds)#, client.guilds[0].text_channels)
+    dl=[]
+    tupd=[]
+    toadd=[]
+    todelete=[]
     for u in client.guilds[0].members:
-        print(u.name, u, [x.name for x in u.roles])
+      if('madeyak' in [x.name for x in u.roles]): # for now, read only made yaks
+        r=[x.name for x in u.roles if x.name not in ['@everyone','yak']]
+        dl.append(str(u),r)
+        print(u.name, u, r)
+    for i in l:
+        found=False
+        for j in dl:
+            if i["discordID"]==j[0]:
+                found=True
+                if set(i["discord roles"]).difference(set(j[1])):
+                    tupd.append({"id":i["id"],"discord roles":j[1]})
+                break
+        if found==False:
+            print("consider deleting member not on discord (but remember anne):",i["id"],i["title"])
+            todelete.append(i)
+    print("list of roles that need to be updated in knack:",tupd)
+    existing=[i["discordID"] for i in l]
+    got=[i[0] for i in dl]
+    toadd=[x for x in got if x not in existing]
+    print("consider adding these new madeyaks to members",toadd) #IRL there should probbaly be a form to fill sent to knack via some other way. maybe manual entry
+                    
+    make_and_write_members_file()
     exit(0) #do not want program actually running 
 
-@client.event
-async def on_message(message):
+@client.event 
+async def on_message(message): #should never run
     if message.author == client.user:
         return
 
@@ -56,27 +107,10 @@ for r in records: #this should create a propert dict and also save it to file fo
     #print("links=", data["links"])
     if data["links"]:
        data["links"]=ast.literal_eval(data["links"])
+    if data["password"]:
+       data["password"]="itisasecret"
     l.append(data)
-with open('members.json', 'w') as fp:
-    json.dump(l, fp)
-#now upload the list so we use knack as a file server
-herebefiles=knack_app.get('object_28')
-print("for the record:",dict(herebefiles[0])) #indeed. application is listed as *** rather than "5f286f84d61121001594a056"
-file_id=dict(herebefiles[0])['id']
-res = knack_app.upload(
-     container="object_28",  # must be an object key or name
-     field="field_595",
-     path="members.json",
-     asset_type="file",  # must be 'file' or 'image', depending on field type
-     record_id=file_id
-)
-print("res is:",res)
-loc=res['field_595_raw']['url']
-if res['field_595_raw']['application_id']=='***':
-    loc=loc.replace("***",app_id)
-with open('linktomembers', 'w') as fp:#thsi will be pushed to github. we hope
-    fp.write(loc)
-    
+   
 
-print(os.listdir(github_repository_base))
+#print(os.listdir(github_repository_base))
 client.run(sys.argv[1])
