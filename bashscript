@@ -1,5 +1,7 @@
+set -x
 python -m pip install --upgrade --user pip setuptools wheel
 pip install --user pyyaml
 pip install --user discord.py
 pip install --user knackpy
 #maybe run python from here. with a timeout 60 command
+echo finished bash script
