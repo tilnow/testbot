@@ -31,7 +31,7 @@ jobs:
        
     - name: Run a multi-line script
       env:
-         DISCORD_CODE: ${{ secrets.DISCORD_CODE }}
+         DISCORD_CODE: ${{ secrets.YAK_DISCORD_CODE }}
          KNACK_APPID: ${{ secrets.KNACK_APPID }}
          KNACK_CODE: ${{ secrets.KNACK_CODE }}
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
