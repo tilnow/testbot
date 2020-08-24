@@ -51,7 +51,7 @@ try:
           if('madeyak' in [x.name for x in u.roles]): # for now, read only made yaks
             r=[x.name for x in u.roles if x.name not in ['@everyone','yak']]
             dl.append((str(u),r))
-            print(u.name, u, r, flush=True)
+            print(u.name, u.id, u, r, flush=True)
         print("l,dl is:", len(l),len(dl),flush=True)
         def nn(x):
             if x:
@@ -67,13 +67,17 @@ try:
                         tupd.append({"id":i["id"],"discord roles":j[1]}) #we assume that discord rules over knack and we simply overwrite
                     break
             if found==False:
-                print("consider deleting member not on discord (but remember anne):",i["id"],i["title"])
+                print("consider deleting member not on discord (but remember anne) and maybe they just changed their discord id:",i["id"],i["title"])
                 todelete.append(i)
-        print("list of roles that need to be updated in knack:",tupd)
+        print("list of roles that need to be updated in knack:",tupd,flush=True)
+        for x in tupd:
+            res = knack_app.record(method="update", data=x, obj="object_27")
+            print(res,flush=True)
+        print("updated",flush=True)
         existing=[i["discordID"] for i in l]
         got=[i[0] for i in dl]
         toadd=[x for x in got if x not in existing]
-        print("consider adding these new madeyaks to members",toadd, flush=True) #IRL there should probbaly be a form to fill sent to knack via some other way. maybe manual entry
+        print("consider adding these new madeyaks to members, or maybe they just change dthier discord id",toadd, flush=True) #IRL there should probbaly be a form to fill sent to knack via some other way. maybe manual entry
 
         make_and_write_members_file()
         exit(0) #do not want program actually running 
