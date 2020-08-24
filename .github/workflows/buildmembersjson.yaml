@@ -45,7 +45,7 @@ jobs:
         echo "After python -c"
         python $GITHUB_WORKSPACE/littlepythonfile.py $DISCORD_CODE $KNACK_APPID $KNACK_CODE $GITHUB_TOKEN $GITHUB_WORKSPACE
         echo "after test python"
-        python $GITHUB_WORKSPACE/pythonfile.py $DISCORD_CODE $KNACK_APPID $KNACK_CODE $GITHUB_TOKEN $GITHUB_WORKSPACE
+        timeout 90s python $GITHUB_WORKSPACE/pythonfile.py $DISCORD_CODE $KNACK_APPID $KNACK_CODE $GITHUB_TOKEN $GITHUB_WORKSPACE
         echo also after
     - name: 'create artifact'
       uses: 'actions/upload-artifact@v2'
