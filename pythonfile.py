@@ -1,5 +1,5 @@
 try:
-    print("this is a python file")
+    print("this is a python file", flush=True)
 
     import discord
     import traceback
@@ -14,6 +14,7 @@ try:
     tupd=[]
 
     def make_and_write_members_file():
+        print("started make", flush=True)
         with open('members.json', 'w') as fp: #need to make sure this happens after discord bot...
             json.dump(l, fp)
 
@@ -39,7 +40,7 @@ try:
     @client.event
     async def on_ready():
         global dl,l
-        print('We have logged in as {0.user}'.format(client),  client.guilds)#, client.guilds[0].text_channels)
+        print('We have logged in as {0.user}'.format(client),  client.guilds, flush=True) #, client.guilds[0].text_channels, flush=True)
         dl=[]
         tupd=[]
         toadd=[]
@@ -48,7 +49,7 @@ try:
           if('madeyak' in [x.name for x in u.roles]): # for now, read only made yaks
             r=[x.name for x in u.roles if x.name not in ['@everyone','yak']]
             dl.append(str(u),r)
-            print(u.name, u, r)
+            print(u.name, u, r, flush=True)
         for i in l:
             found=False
             for j in dl:
@@ -64,7 +65,7 @@ try:
         existing=[i["discordID"] for i in l]
         got=[i[0] for i in dl]
         toadd=[x for x in got if x not in existing]
-        print("consider adding these new madeyaks to members",toadd) #IRL there should probbaly be a form to fill sent to knack via some other way. maybe manual entry
+        print("consider adding these new madeyaks to members",toadd, flush=True) #IRL there should probbaly be a form to fill sent to knack via some other way. maybe manual entry
 
         make_and_write_members_file()
         exit(0) #do not want program actually running 
@@ -83,7 +84,7 @@ try:
     knack_app = knackpy.App(app_id=app_id,  api_key=sys.argv[3])
     github_token=sys.argv[4]
     github_repository_base=sys.argv[5]
-    print(knack_app.info())
+    print(knack_app.info(), flush=True)
     records=knack_app.get('object_27')
     print("the records from knack are many. now show just one")
     #print([(x,vars(x)) for x in records])
@@ -114,7 +115,7 @@ try:
            data["password"]="itisasecret"
         l.append(data)
 
-
+    print("hum", flush=True)
     #print(os.listdir(github_repository_base))
     client.run(sys.argv[1])
 except Exception as e:
