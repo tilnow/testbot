@@ -1,3 +1,5 @@
+#this file has several places where we use the raw filed number of knack. shoudl be fixed to none raw, probbaly, using a translation table  
+
 try:
     print("this is a python file", flush=True)
 
@@ -50,7 +52,7 @@ try:
         for u in uu:
           if('madeyak' in [x.name for x in u.roles]): # for now, read only made yaks
             r=[x.name for x in u.roles if x.name not in ['@everyone','yak']]
-            dl.append((str(u),r))
+            dl.append((str(u),r,u.id))
             print(u.name, u.id, u, r, flush=True)
         print("l,dl is:", len(l),len(dl),flush=True)
         def nn(x):
@@ -61,21 +63,31 @@ try:
         for i in l:
             found=False
             for j in dl:
-                if i["discordID"]==j[0]:
+                if i["discordID"]==j[0]:#then change to discord_user_id and add code to check if user name changed and if yes, update field 586
                     found=True
                     if [l for l in nn(i["discord roles"])+nn(j[1]) if (l in nn(i["discord roles"])) ^ (l in nn(j[1]))]:
-                        tupd.append({"id":i["id"],"discord roles":j[1]}) #we assume that discord rules over knack and we simply overwrite
+                        tupd.append({"id":i["id"],"field_591":j[1]}) #we assume that discord rules over knack and we simply overwrite
+                        l['discord roles']=j[1] #also update l, as it is what we will be using
+                    
                     break
             if found==False:
                 print("consider deleting member not on discord (but remember anne) and maybe they just changed their discord id:",i["id"],i["title"])
                 todelete.append(i)
+        #just once, copy over the discord_user_id and then comment away
+        for i in l:
+            nm=i["discordID"]
+            for j in dl:
+                if j[0]==nm:
+                    tupd.append({"id":i["id"],"field_596":j[2]})
+                    l['discord_user_id']=j[2]
+                    break
         print("list of roles that need to be updated in knack:",tupd,flush=True)
         for x in tupd:
             res = knack_app.record(method="update", data=x, obj="object_27")
             print(res,flush=True)
         print("updated",flush=True)
-        existing=[i["discordID"] for i in l]
-        got=[i[0] for i in dl]
+        existing=[i["discord_user_id"] for i in l] #by now we HAVE discord_user_id
+        got=[i[2] for i in dl] #user_id more reliable than username
         toadd=[x for x in got if x not in existing]
         print("consider adding these new madeyaks to members, or maybe they just change dthier discord id",toadd, flush=True) #IRL there should probbaly be a form to fill sent to knack via some other way. maybe manual entry
 
